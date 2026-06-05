@@ -1,176 +1,15 @@
-/*import NotificationCard from "../components/NotificationCard";
 
-const sampleNotifications = [
-  {
-    ID: "1",
-    Type: "Placement",
-    Message: "Amazon Hiring",
-    Timestamp: "2026-04-22 17:51:18",
-  },
-  {
-    ID: "2",
-    Type: "Result",
-    Message: "Mid Sem Result",
-    Timestamp: "2026-04-22 17:50:18",
-  },
-  {
-    ID: "3",
-    Type: "Event",
-    Message: "Tech Fest",
-    Timestamp: "2026-04-22 17:49:18",
-  },
-];
-
-function AllNotifications() {
-  return (
-    <div>
-      <h1>All Notifications</h1>
-
-      {sampleNotifications.map((notification) => (
-        <NotificationCard
-          key={notification.ID}
-          notification={notification}
-        />
-      ))}
-    </div>
-  );
-}
-
-export default AllNotifications;
-function AllNotifications() {
-  return <h1>All Notifications Page</h1>;
-}
-
-export default AllNotifications;
-
-import NotificationCard from "../components/NotificationCard";
-
-function AllNotifications() {
-  const notification = {
-    ID: "1",
-    Type: "Placement",
-    Message: "Amazon Hiring",
-    Timestamp: "2026-04-22 17:51:18",
-  };
-
-  return (
-    <div>
-      <h1>All Notifications Page</h1>
-
-      <NotificationCard notification={notification} />
-    </div>
-  );
-}
-
-export default AllNotifications;
-
-import NotificationCard from "../components/NotificationCard";
-
-function AllNotifications() {
-  return (
-    <div>
-      <h1>All Notifications Page</h1>
-      <NotificationCard />
-    </div>
-  );
-}
-
-export default AllNotifications;
-
-import NotificationCard from "../components/NotificationCard";
-
-function AllNotifications() {
-  const notification = {
-    ID: "1",
-    Type: "Placement",
-    Message: "Amazon Hiring",
-    Timestamp: "2026-04-22 17:51:18",
-  };
-
-  return (
-    <div>
-      <h1>All Notifications Page</h1>
-      <NotificationCard notification={notification} />
-    </div>
-  );
-}
-
-export default AllNotifications;
-
-import NotificationCard from "../components/NotificationCard";
-import { Link } from "react-router-dom";
-
-const sampleNotifications = [
-  {
-    ID: "1",
-    Type: "Placement",
-    Message: "Amazon Hiring",
-    Timestamp: "2026-04-22 17:51:18",
-  },
-  {
-    ID: "2",
-    Type: "Result",
-    Message: "Mid Sem Result",
-    Timestamp: "2026-04-22 17:50:18",
-  },
-  {
-    ID: "3",
-    Type: "Event",
-    Message: "Tech Fest",
-    Timestamp: "2026-04-22 17:49:18",
-  },
-];
-
-function AllNotifications() {
-  return (
-    <div>
-        <Link to="/priority">
-  <button>Go To Priority Inbox</button>
-</Link>
-      <h1>All Notifications</h1>
-
-      {sampleNotifications.map((notification) => (
-        <NotificationCard
-          key={notification.ID}
-          notification={notification}
-        />
-      ))}
-    </div>
-  );
-}
-
-export default AllNotifications;
-*/
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NotificationCard from "../components/NotificationCard";
 import { log } from "../utils/logger";
-
-const sampleNotifications = [
-  {
-    ID: "1",
-    Type: "Placement",
-    Message: "Amazon Hiring",
-    Timestamp: "2026-04-22 17:51:18",
-  },
-  {
-    ID: "2",
-    Type: "Result",
-    Message: "Mid Sem Result",
-    Timestamp: "2026-04-22 17:50:18",
-  },
-  {
-    ID: "3",
-    Type: "Event",
-    Message: "Tech Fest",
-    Timestamp: "2026-04-22 17:49:18",
-  },
-];
+import { getNotifications } from "../services/notificationService";
 
 function AllNotifications() {
   const [viewedNotifications, setViewedNotifications] =
     useState([]);
-
+const [notifications, setNotifications] =
+  useState([]);
   const [selectedType, setSelectedType] =
     useState("All");
 
@@ -180,13 +19,22 @@ function AllNotifications() {
   const notificationsPerPage = 2;
 
   useEffect(() => {
-    const storedViewed =
-      JSON.parse(
-        localStorage.getItem("viewedNotifications")
-      ) || [];
+  const storedViewed =
+    JSON.parse(
+      localStorage.getItem("viewedNotifications")
+    ) || [];
 
-    setViewedNotifications(storedViewed);
-  }, []);
+  setViewedNotifications(storedViewed);
+
+  async function loadNotifications() {
+    const data =
+      await getNotifications();
+
+    setNotifications(data);
+  }
+
+  loadNotifications();
+}, []);
 
   const handleView = (id) => {
     log(
@@ -212,8 +60,8 @@ function AllNotifications() {
 
   const filteredNotifications =
     selectedType === "All"
-      ? sampleNotifications
-      : sampleNotifications.filter(
+      ? notifications
+      : notifications.filter(
           (notification) =>
             notification.Type === selectedType
         );

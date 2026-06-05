@@ -3,14 +3,13 @@ const axios = require("axios");
 async function register() {
   try {
     const response = await axios.post(
-      "https://20.244.56.144/evaluation-service/register",
+      "http://4.224.186.213/evaluation-service/register",
       {
         email: "kbsc.kandimalla@gmail.com",
         name: "Kandimalla Bhavani Shankar",
         mobileNo: "8186036945",
-        githubUsername: "https://github.com/shankarkandimalla ",
-        rollNo: "23BQ1A1248",
-        collegeName: "vvitn",
+        githubUsername: "shankarkandimalla",
+        rollNo: "23bq1a1248",
         accessCode: "QQdEYy"
       }
     );

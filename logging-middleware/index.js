@@ -15,16 +15,7 @@ async function Log(
       timestamp: new Date().toISOString(),
     });
 
-    /*
-    Future API Call
-
-    await axios.post(LOG_API_URL,{
-      stack,
-      level,
-      packageName,
-      message
-    });
-    */
+ 
   } catch (error) {
     console.error(
       "Logging Error:",
