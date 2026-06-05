@@ -1,0 +1,63 @@
+# Notification System
+
+## Overview
+
+A React-based Notification System developed as part of the Afford Medical Technologies evaluation.
+
+## Features
+
+* Notification API Integration
+* Authentication using Bearer Token
+* Notification Filtering
+* Pagination
+* Priority Inbox
+* Viewed/Unviewed Notification Tracking
+* React Router Navigation
+* Logging Middleware
+
+## Project Structure
+
+23BQ1A1248
+
+* logging-middleware/
+* notification_app/
+* notification_system_design.md
+
+## Technologies Used
+
+### Frontend
+
+* React
+* Vite
+* JavaScript
+* React Router
+
+### Middleware
+
+* Node.js
+* Axios
+
+## How to Run
+
+### Frontend
+
+```bash
+cd notification_app
+npm install
+npm run dev
+```
+
+### Middleware
+
+```bash
+cd logging-middleware
+npm install
+node auth.js
+```
+
+## Author
+
+Kandimalla Bhavani Shankar
+
+Roll No: 23BQ1A1248
+GitHub: shankarkandimalla
