@@ -144,6 +144,7 @@ export default AllNotifications;
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NotificationCard from "../components/NotificationCard";
+import { log } from "../utils/logger";
 
 const sampleNotifications = [
   {
@@ -188,6 +189,12 @@ function AllNotifications() {
   }, []);
 
   const handleView = (id) => {
+    log(
+  "frontend",
+  "info",
+  "notifications",
+  `Viewed notification ${id}`
+);
     if (!viewedNotifications.includes(id)) {
       const updatedViewed = [
         ...viewedNotifications,

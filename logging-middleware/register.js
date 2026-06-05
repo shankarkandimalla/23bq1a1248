@@ -3,7 +3,7 @@ const axios = require("axios");
 async function register() {
   try {
     const response = await axios.post(
-      "http://20.244.56.144/evaluation-service/register",
+      "https://20.244.56.144/evaluation-service/register",
       {
         email: "kbsc.kandimalla@gmail.com",
         name: "Kandimalla Bhavani Shankar",
